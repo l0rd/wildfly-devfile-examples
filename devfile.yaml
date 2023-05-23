@@ -23,6 +23,19 @@ attributes:
   .che/che-theia-plugins.yaml: |
     - id: redhat/java
 components:
+  - name: tools
+# to set this as the default one for che execution
+    attributes:
+      controller.devfile.io/merge-contribution: true
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 1512Mi
+      mountSources: true
+      env:
+        - name: OPENSHIFT_IMAGE_REGISTRY
+          value: "image-registry.openshift-image-registry.svc:5000"
+        - name: IMAGE
+          value: "numberguess"
   - name: wildfly
     container:
       image: quay.io/wildfly/wildfly-s2i:latest
@@ -57,19 +70,6 @@ components:
           protocol: tcp
           targetPort: 4172
           exposure: internal
-  - name: tools
-# to set this as the default one for che execution
-    attributes:
-      controller.devfile.io/merge-contribution: true
-    container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
-      memoryLimit: 1512Mi
-      mountSources: true
-      env:
-        - name: OPENSHIFT_IMAGE_REGISTRY
-          value: "image-registry.openshift-image-registry.svc:5000"
-        - name: IMAGE
-          value: "numberguess"
   - name: m2-repository
     volume:
       size: 3Gi
