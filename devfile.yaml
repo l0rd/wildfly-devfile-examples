@@ -24,7 +24,7 @@ components:
   - name: wildfly
     container:
       image: quay.io/wildfly/wildfly-s2i:latest
-      command: ['tail', '-f', '/dev/null/']
+      command: ['sleep', 'infinity']
       memoryLimit: 1512Mi
       volumeMounts:
         - name: m2-repository
