@@ -24,9 +24,6 @@ attributes:
     - id: redhat/java
 components:
   - name: tools
-# to set this as the default one for che execution
-    attributes:
-      controller.devfile.io/merge-contribution: true
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 1512Mi
