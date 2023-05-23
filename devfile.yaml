@@ -11,23 +11,11 @@ metadata:
   language: 'java'
 attributes:
   controller.devfile.io/storage-type: ephemeral
-  .vscode/extensions.json: |
-    {
-      "recommendations": [
-        "redhat.java",
-        "vscjava.vscode-java-debug",
-        "vscjava.vscode-java-test",
-        "redhat.fabric8-analytics"
-      ]
-    }
-  .che/che-theia-plugins.yaml: |
-    - id: redhat/java
 components:
   - name: tools
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      image: quay.io/devfile/universal-developer-image:latest
       memoryLimit: 1512Mi
-      mountSources: true
       env:
         - name: OPENSHIFT_IMAGE_REGISTRY
           value: "image-registry.openshift-image-registry.svc:5000"
@@ -36,8 +24,8 @@ components:
   - name: wildfly
     container:
       image: quay.io/wildfly/wildfly-s2i:latest
+      command: ['tail', '-f', '/dev/null/']
       memoryLimit: 1512Mi
-      mountSources: true
       volumeMounts:
         - name: m2-repository
           path: /home/jboss/.m2/repository
